@@ -1,0 +1,156 @@
+export const products = [
+  {
+    id: 1,
+    name: "Dominar 250",
+    marca: "Bajaj",
+    image: "https://http2.mlstatic.com/D_NQ_NP_829138-MLA83350815910_042025-O.webp",
+    description:
+      "Ágil y versátil, la Dominar 250 ofrece un excelente equilibrio entre potencia y control para uso diario.",
+    price: 7638990,
+    stock: 17,
+    category: "Naked",
+  },
+  {
+    id: 2,
+    name: "Dominar 400",
+    marca: "Bajaj",
+    image: "https://http2.mlstatic.com/D_NQ_NP_615250-MLA82177801776_022025-O.webp",
+    description:
+      "Con un motor de 373cc y diseño robusto, la Dominar 400 es ideal para viajes largos y aventura urbana.",
+    price: 8491000,
+    stock: 15,
+    category: "Naked",
+  },
+  {
+    id: 3,
+    name: "Benelli 302s",
+    marca: "Benelli",
+    image: "https://http2.mlstatic.com/D_NQ_NP_948401-MLA74059022253_012024-O.webp",
+    description:
+      "Diseño moderno y agresivo con motor bicilíndrico de 300cc, perfecta para quienes buscan estilo y rendimiento.",
+    price: 9550000,
+    stock: 12,
+    category: "Naked",
+  },
+  {
+    id: 4,
+    name: "Benelli 180s",
+    marca: "Benelli",
+    image: "https://http2.mlstatic.com/D_NQ_NP_748993-MLA74059021325_012024-O.webp",
+    description:
+      "Compacta, ligera y con diseño deportivo, ideal para iniciarse en el mundo de las motos naked.",
+    price: 1120000,
+    stock: 8,
+    category: "Naked",
+  },
+  {
+    id: 5,
+    name: "Yamaha FZ25",
+    marca: "Yamaha",
+    image: "https://http2.mlstatic.com/D_NQ_NP_920674-MLA46321782072_062021-O.webp",
+    description:
+      "Una naked equilibrada, con buen torque y eficiencia, pensada para uso urbano y paseos tranquilos.",
+    price: 7200000,
+    stock: 10,
+    category: "Naked",
+  },
+  {
+    id: 6,
+    name: "Yamaha MT03",
+    marca: "Yamaha",
+    image: "https://http2.mlstatic.com/D_NQ_NP_627674-MLA70566878733_072023-O.webp",
+    description:
+      "Estética agresiva y motor bicilíndrico de 321cc, ideal para quienes buscan adrenalina y estilo.",
+    price: 10300000,
+    stock: 7,
+    category: "Naked",
+  },
+  {
+    id: 7,
+    name: "Yamaha XTZ125",
+    marca: "Yamaha",
+    image: "https://http2.mlstatic.com/D_NQ_NP_779216-MLA81009663044_122024-O.webp",
+    description:
+      "Liviana y maniobrable, la XTZ125 es ideal para iniciarse en caminos rurales y aventuras off-road.",
+    price: 5000000,
+    stock: 14,
+    category: "Enduro",
+  },
+  {
+    id: 8,
+    name: "Yamaha XTZ250",
+    marca: "Yamaha",
+    image: "https://http2.mlstatic.com/D_NQ_NP_747067-MLA74503315244_022024-O.webp",
+    description:
+      "Versátil y potente, excelente para quienes buscan un buen desempeño tanto en ciudad como fuera de ruta.",
+    price: 7700000,
+    stock: 10,
+    category: "Enduro",
+  },
+  {
+    id: 9,
+    name: "Honda XR190",
+    marca: "Honda",
+    image: "https://http2.mlstatic.com/D_NQ_NP_689355-MLA76805908306_062024-O.webp",
+    description:
+      "Duradera y confiable, con suspensión robusta y motor eficiente para recorridos mixtos.",
+    price: 6650000,
+    stock: 11,
+    category: "Enduro",
+  },
+  {
+    id: 10,
+    name: "Honda CRF250",
+    marca: "Honda",
+    image: "https://http2.mlstatic.com/D_NQ_NP_662599-MLA75801408703_042024-O.webp",
+    description:
+      "Preparada para el off-road exigente, con excelente suspensión y gran maniobrabilidad.",
+    price: 12500000,
+    stock: 6,
+    category: "Enduro",
+  },
+  {
+    id: 11,
+    name: "X Citing S 400",
+    marca: "Kymco",
+    image: "https://http2.mlstatic.com/D_NQ_NP_728498-MLA75124109642_032024-O.webp",
+    description:
+      "Scooter de alto rendimiento, ideal para viajes urbanos con gran comodidad y potencia.",
+    price: 1050000,
+    stock: 6,
+    category: "Scooters",
+  },
+  {
+    id: 12,
+    name: "Pcx 160",
+    marca: "Honda",
+    image: "https://http2.mlstatic.com/D_NQ_NP_782610-MLA84735424548_052025-O.webp",
+    description:
+      "Elegante, eficiente y cómoda. La PCX160 es una excelente opción para el día a día en ciudad.",
+    price: 8398000,
+    stock: 9,
+    category: "Scooters",
+  },
+  {
+    id: 13,
+    name: "N Max 155",
+    marca: "Yamaha",
+    image: "https://www.motoroma.com.ar/images/Nmax_3.jpg",
+    description:
+      "Diseño moderno, buena aceleración y tecnología avanzada para tus recorridos urbanos.",
+    price: 7198000,
+    stock: 14,
+    category: "Scooters",
+  },
+  {
+    id: 14,
+    name: "SR3",
+    marca: "Vodge",
+    image: "data:image/jpeg;base64,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",
+    description:
+      "Scooter con diseño deportivo, excelente para moverse con agilidad y estilo por la ciudad.",
+    price: 8300000,
+    stock: 11,
+    category: "Scooters",
+  },
+];
