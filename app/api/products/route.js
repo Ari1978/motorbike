@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { doc, setDoc } from "firebase/firestore";  // Asegúrate de que estas funciones estén importadas correctamente
-import { db } from "../../firebase/getProducts";  // Asegúrate de que la referencia a la base de datos esté bien configurada
+import { db } from "../../firebase/config";  // Asegúrate de que la referencia a la base de datos esté bien configurada
 
 export async function GET(request) {
   return NextResponse.json(products);  // Esto es solo un ejemplo de respuesta, debes obtener los productos desde Firebase si es necesario

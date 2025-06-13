@@ -1,11 +1,9 @@
-// app/product/[id]/page.js
-
 import { getProductById } from "../../firebase/getProducts";
 import ProductDetail from "../../Components/ProductDetail";
 
 export default async function Page({ params }) {
-  // El 'id' ya está resuelto por Next.js cuando usas rutas dinámicas
-  const { id } = params; // Aquí accedemos directamente al 'id' desde 'params'
+  // Asegurarnos de que 'params' esté resuelto antes de acceder a él
+  const { id } = await params;  // Aquí esperamos que params se resuelva
 
   // Llamamos a la función para obtener el producto desde Firebase
   const product = await getProductById(id);
