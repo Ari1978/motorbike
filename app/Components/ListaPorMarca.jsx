@@ -38,39 +38,39 @@ export default function ListaPorMarca() {
     fetchProducts();
   }, [selectedMarca]); 
 
-  return (
+   return (
     <div className="w-full max-w-5xl mx-auto lista-marcas">
-      <div className="flex space-x-4 border-b mb-5">
+      <div className="flex flex-wrap gap-1 justify-center border-b mb-4">
         {marcas.map((marca) => (
           <button
             key={marca}
             aria-selected={selectedMarca === marca}
-            className={`py-2 px-4 font-semibold ${
+            className={`py-[2px] px-[6px] text-[10px] sm:text-[9px] font-medium rounded ${
               selectedMarca === marca
-                ? "border-b-2 border-blue-500 text-blue-200"
-                : "text-gray-600 hover:text-blue-600"
+                ? "border-b-2 border-blue-500 text-blue-400"
+                : "text-gray-500 hover:text-blue-500"
             }`}
-            onClick={() => setSelectedMarca(marca)} 
+            onClick={() => setSelectedMarca(marca)}
           >
-            {marca.charAt(0).toUpperCase() + marca.slice(1)} 
+            {marca.charAt(0).toUpperCase() + marca.slice(1)}
           </button>
         ))}
       </div>
 
-      {/* Mostrar error si ocurre */}
       {error && <p className="text-red-500 text-center">{error}</p>}
 
-      {/* Cargando productos */}
       {loading ? (
         <Loader />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredProducts.length ? (
             filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))
           ) : (
-            <p className="text-center">No hay productos con esa marca.</p>
+            <p className="text-center text-sm text-gray-600">
+              No hay productos con esa marca.
+            </p>
           )}
         </div>
       )}

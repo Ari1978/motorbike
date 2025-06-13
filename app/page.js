@@ -2,7 +2,7 @@
 import BotonContactar from "./Components/BotonContactar";
 import Descripcion from "./Components/Descripcion";
 import Titulo from "./Components/Titulo";
-import ListarPorMarca from "./Components/ListaPorMarca";
+import ListaPorMarca from "./Components/ListaPorMarca";
 // No hace falta importar DetalleDelProducto acá si es una página dinámica
 
 export const metadata = {
@@ -31,7 +31,7 @@ export default function Home() {
       <Titulo />
       <Descripcion />
       <BotonContactar />
-      <ListarPorMarca />
+      <ListaPorMarca />
     </div>
   );
 }
