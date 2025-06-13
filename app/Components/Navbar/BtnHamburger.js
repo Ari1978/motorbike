@@ -14,12 +14,13 @@ export default function BtnHamburger() {
   ];
 
   return (
-    <div>
+    <div className="relative">
+      {/* Botón hamburguesa */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle menu"
+        aria-label="Abrir menú"
         aria-expanded={isOpen}
-        className="md:hidden p-2 rounded hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="md:hidden p-2 rounded-md text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
       >
         {isOpen ? (
           <svg
@@ -52,19 +53,21 @@ export default function BtnHamburger() {
         )}
       </button>
 
+      {/* Menú desplegable */}
       <nav
-        className={`md:hidden bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-700 mt-2 rounded shadow-lg transition-all duration-300 transform ${
-          isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-        } overflow-hidden`}
+        className={`absolute right-0 top-12 z-50 w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-md transition-transform duration-300 ease-in-out origin-top-right transform ${
+          isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
+        }`}
+        role="menu"
         aria-hidden={!isOpen}
       >
-        <ul className="flex flex-col space-y-2 p-4">
+        <ul className="flex flex-col py-2">
           {menuItems.map(({ label, href }) => (
             <li key={href}>
               <Link
                 href={href}
-                className="block text-gray-700 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                onClick={() => setIsOpen(false)} // Cierra el menú al hacer click
+                className="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-gray-800 transition-colors"
+                onClick={() => setIsOpen(false)} // Cierra al hacer click
               >
                 {label}
               </Link>
