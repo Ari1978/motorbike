@@ -1,25 +1,35 @@
 import Link from "next/link";
-import "./globals.css";
+import Image from "next/image";
 
 export default function NotFound() {
   return (
-    <div className="notfound-container">
-      <div className="notfound-card">
-        <img
-          src="https://www.creativefabrica.com/wp-content/uploads/2023/02/16/3d-Rendering-404-Page-Error-Icon-Graphics-61433451-1-1-580x425.jpg"
-          alt="404 error"
-          className="notfound-image"
+    <main className="flex min-h-screen items-center justify-center bg-zinc-950 px-6 text-white">
+      <div className="flex w-full max-w-xl flex-col items-center gap-6 text-center">
+        
+        <Image
+          src="https://images.unsplash.com/photo-1588422333078-82e91c2b52c8?q=80&w=800"
+          alt="Error 404"
+          width={400}
+          height={300}
+          className="rounded-2xl shadow-xl"
+          priority
         />
-        <h3 className="notfound-title">Página no encontrada</h3>
-        <p className="notfound-message">
-          Lo sentimos, la página que estás buscando no existe.
+
+        <h1 className="text-4xl font-bold tracking-tight">
+          404 - Página no encontrada
+        </h1>
+
+        <p className="text-zinc-400">
+          La página que estás buscando no existe o fue movida.
         </p>
-        <Link href="/" className="notfound-link">
-          Regresar a la página principal
+
+        <Link
+          href="/"
+          className="mt-4 rounded-xl bg-white px-6 py-3 font-medium text-black transition hover:bg-zinc-200"
+        >
+          Volver al inicio
         </Link>
       </div>
-    </div>
+    </main>
   );
 }
-
-

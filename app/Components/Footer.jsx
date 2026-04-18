@@ -1,46 +1,60 @@
-import React from 'react';
-import Link from 'next/link'; 
+import Link from "next/link";
 
-
-
-
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-10 pb-6 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Logo y descripción */}
-        <div>
-          <h2 className="text-2xl font-bold text-white mb-2">Motorcicle</h2>
-          <p className="text-sm">Pasión por las motos, libertad sobre dos ruedas.</p>
+    <footer className="bg-zinc-950 px-6 py-12 text-zinc-400">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 md:grid-cols-3">
+        {/* Marca */}
+        <div className="flex flex-col gap-3">
+          <h2 className="text-2xl font-bold text-white">Motorcicle</h2>
+          <p className="text-sm text-zinc-500">
+            Pasión por las motos. Libertad sobre dos ruedas.
+          </p>
         </div>
 
-        {/* Enlaces */}
+        {/* Navegación */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-3">Secciones</h3>
+          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-300">
+            Navegación
+          </h3>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/" className="hover:text-white transition">Inicio</Link></li>
-            <li><Link href="/nosotros" className="hover:text-white transition">Nosotros</Link></li>
-            <li><Link href="/scooters" className="hover:text-white transition">Scooters</Link></li>
-            <li><Link href="/enduro" className="hover:text-white transition">Enduro</Link></li>
-            <li><Link href="/contacto" className="hover:text-white transition">Contacto</Link></li>
+            {[
+              { href: "/", label: "Inicio" },
+              { href: "/nosotros", label: "Nosotros" },
+              { href: "/scooters", label: "Scooters" },
+              { href: "/enduro", label: "Enduro" },
+              { href: "/contacto", label: "Contacto" },
+            ].map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="transition hover:text-white">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Contacto */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-3">Contacto</h3>
-          <p className="text-sm">📧 info@motorcicle.com</p>
-          <p className="text-sm">📞 +54 11 2345 6789</p>
-          <p className="text-sm">📍 Buenos Aires, Argentina</p>
+          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-300">
+            Contacto
+          </h3>
+          <div className="space-y-2 text-sm">
+            <p>info@motorcicle.com</p>
+            <p>+54 11 2345 6789</p>
+            <p>Buenos Aires, Argentina</p>
+          </div>
         </div>
       </div>
-
+      <div className="mt-6 text-center opacity-50 hover:opacity-100 transition">
+        <Link href="/admin" className="text-xs">
+          Admin
+        </Link>
+      </div>
       {/* Línea inferior */}
-      <div className="mt-8 border-t border-gray-700 pt-4 text-center text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} Motorcicle. Todos los derechos reservados.
+      <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 pt-4 text-center text-xs text-zinc-500">
+        © {new Date().getFullYear()} Motorcicle. Todos los derechos reservados.
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

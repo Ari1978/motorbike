@@ -349,19 +349,18 @@
 
 /* Estilos Generales para el Detalle del Producto */
 .product-detail {
-  background-color: #f8f8f8; /* Fondo gris claro */
-  padding: 30px 10px;
+  background-color: transparent;
+  padding: 20px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 }
 
 /* Contenedor principal para la información y la imagen */
 .product-detail-container {
   display: flex;
   flex-direction: row;
-  max-width: 1200px;
+  max-width: 900px;
   width: 100%;
   background-color: #fff; /* Fondo blanco para el contenedor principal */
   border-radius: 12px; /* Bordes redondeados */
@@ -374,7 +373,7 @@
 /* Estilo para la imagen del producto */
 .product-detail-img-container {
   flex: 1;
-  max-width: 500px;
+  max-width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -416,7 +415,7 @@
   color: #555;
   line-height: 1.5;
   margin-bottom: 20px;
-  height: 120px;
+  height: auto;
   overflow: hidden;
   text-overflow: ellipsis;
 }

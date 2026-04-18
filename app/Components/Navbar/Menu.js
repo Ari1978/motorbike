@@ -1,73 +1,50 @@
-import React from 'react';
-import Link from 'next/link';
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const links = [
+  { href: "/", label: "Inicio" },
+  { href: "/nosotros", label: "Nosotros" },
+  { href: "/scooters", label: "Scooters" },
+  { href: "/naked", label: "Naked" },
+  { href: "/enduro", label: "Enduro" },
+  { href: "/contacto", label: "Contacto" },
+  { href: "/post", label: "Blog" },
+];
 
 export default function Menu() {
+  const pathname = usePathname();
+
   return (
     <nav>
-      <ul className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
-        <li>
-          <Link
-            href="/"
-            className="text-gray-700 hover:text-blue-700 dark:text-white dark:hover:text-blue-500 font-medium transition-colors"
-            aria-label="Ir a la página de inicio"
-          >
-            Inicio
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/nosotros"
-            className="text-gray-700 hover:text-blue-700 dark:text-white dark:hover:text-blue-500 font-medium transition-colors"
-            aria-label="Ir a la página de Nosotros"
-          >
-            Nosotros
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/scooters"
-            className="text-gray-700 hover:text-blue-700 dark:text-white dark:hover:text-blue-500 font-medium transition-colors"
-            aria-label="Ir a la página de Scooters"
-          >
-            Scooters
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/naked"
-            className="text-gray-700 hover:text-blue-700 dark:text-white dark:hover:text-blue-500 font-medium transition-colors"
-            aria-label="Ir a la página de Naked"
-          >
-            Naked
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/enduro"
-            className="text-gray-700 hover:text-blue-700 dark:text-white dark:hover:text-blue-500 font-medium transition-colors"
-            aria-label="Ir a la página de Enduro"
-          >
-            Enduro
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/contacto"
-            className="text-gray-700 hover:text-blue-700 dark:text-white dark:hover:text-blue-500 font-medium transition-colors"
-            aria-label="Ir a la página de Contacto"
-          >
-            Contacto
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/post"
-            className="text-gray-700 hover:text-blue-700 dark:text-white dark:hover:text-blue-500 font-medium transition-colors"
-            aria-label="Ir al Blog"
-          >
-            Blog
-          </Link>
-        </li>
+      <ul className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+        {links.map((link) => {
+          const isActive = pathname === link.href;
+
+          return (
+            <li key={link.href} className="relative group">
+              <Link
+                href={link.href}
+                className={`text-sm font-medium transition-colors ${
+                  isActive
+                    ? "text-blue-500"
+                    : "text-gray-700 dark:text-white hover:text-blue-500"
+                }`}
+              >
+                {link.label}
+              </Link>
+
+              {/* underline animado */}
+              <span
+                className={`absolute left-0 -bottom-1 h-[2px] bg-blue-500 transition-all duration-300 ${
+                  isActive ? "w-full" : "w-0 group-hover:w-full"
+                }`}
+              />
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

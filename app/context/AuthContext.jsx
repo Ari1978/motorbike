@@ -1,11 +1,12 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import {signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup,} from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth, googleProvider } from "../firebase/config";
-
-
-
 
 // Crear el contexto de autenticación
 export const AuthContext = createContext();
@@ -23,24 +24,37 @@ export function AuthProvider({ children }) {
 
   // Función para iniciar sesión
   const login = async (email, password) => {
-  try {
-    console.log("Intentando login con", email, password);
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log("Login exitoso:", userCredential.user);
+    try {
+      console.log("Intentando login con", email, password);
 
-    setUser({
-      isAuthenticated: true,
-      email: userCredential.user.email,
-      uid: userCredential.user.uid,
-    });
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
 
-    return { success: true };
-  } catch (error) {
-    console.error("Error al iniciar sesión:", error.code, error.message);
-    return { success: false, error };
-  }
-};
+      console.log("Login exitoso:", userCredential.user);
 
+      setUser({
+        isAuthenticated: true,
+        email: userCredential.user.email,
+        uid: userCredential.user.uid,
+      });
+
+      return {
+        success: true,
+        user: userCredential.user, // ✅ FIX
+      };
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error.code, error.message);
+
+      return {
+        success: false,
+        user: null,
+        error,
+      };
+    }
+  };
 
   // Función para registrar un nuevo usuario
   const register = async (email, password) => {
@@ -59,18 +73,17 @@ export function AuthProvider({ children }) {
 
   // Función para cerrar sesión
   const logout = async () => {
-  try {
-    await auth.signOut();
-    setUser({
-      isAuthenticated: false,
-      email: null,
-      uid: null,
-    });
-  } catch (error) {
-    console.error("Error al cerrar sesión:", error);
-  }
-};
-
+    try {
+      await auth.signOut();
+      setUser({
+        isAuthenticated: false,
+        email: null,
+        uid: null,
+      });
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  };
 
   // Función para iniciar sesión con Google
   const loginWithGoogle = async (provider) => {

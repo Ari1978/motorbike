@@ -1,73 +1,63 @@
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  getDoc,
+} from "firebase/firestore";
+import { db } from "../firebase/config";
 
-import { getFirestore, collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
-import { firebaseApp } from "./config";  
-
-// Inicializar Firestore
-const db = getFirestore(firebaseApp);
-
-// Función para obtener los productos por categoría desde la colección 'motorbike'
+// 🔹 POR CATEGORÍA
 export const getProductsByCategory = async (category) => {
   try {
-    const motorbikeCollection = collection(db, "motorbike"); // Usamos la colección 'motorbike'
-    const q = query(motorbikeCollection, where("category", "==", category)); // Filtramos por categoría
-    const querySnapshot = await getDocs(q);
+    const ref = collection(db, "motorbike");
+    const q = query(ref, where("category", "==", category));
+    const snap = await getDocs(q);
 
-    const productsList = querySnapshot.docs.map(doc => ({
-      id: doc.id,  // Incluimos el ID del documento
-      ...doc.data(),  // Los datos del documento
+    return snap.docs.map((d) => ({
+      id: d.id,
+      ...d.data(),
     }));
-    
-    return productsList;
   } catch (error) {
-    console.error("Error al obtener productos por categoría:", error);
-    throw error;  // Vuelve a lanzar el error
+    console.error("Error categoría:", error);
+    throw error;
   }
 };
 
-// Función para obtener los productos por marca desde la colección 'motorbike'
+// 🔹 POR MARCA
 export const getProductsByMarca = async (marca) => {
   try {
-    const motorbikeCollection = collection(db, "motorbike"); // Usamos la colección 'motorbike'
+    const ref = collection(db, "motorbike");
 
-    let q;
-    
-    if (marca && marca !== "all") {
-    
-      q = query(motorbikeCollection, where("marca", "==", marca));
-    } else {
-    
-      q = query(motorbikeCollection);
-    }
+    const q =
+      marca && marca !== "all"
+        ? query(ref, where("marca", "==", marca))
+        : ref;
 
-    const querySnapshot = await getDocs(q);
+    const snap = await getDocs(q);
 
-    
-    const productsList = querySnapshot.docs.map((doc) => ({
-      id: doc.id, 
-      ...doc.data(), 
+    return snap.docs.map((d) => ({
+      id: d.id,
+      ...d.data(),
     }));
-
-    return productsList;  
   } catch (error) {
-    console.error("Error al obtener productos por marca:", error);
-    throw error;  // Vuelve a lanzar el error
+    console.error("Error marca:", error);
+    throw error;
   }
 };
 
-// Función para obtener un producto por ID desde la colección 'motorbike'
+// 🔹 POR ID
 export const getProductById = async (id) => {
   try {
-    const productRef = doc(db, "motorbike", id);  
-    const docSnap = await getDoc(productRef);  
+    const ref = doc(db, "motorbike", id);
+    const snap = await getDoc(ref);
 
-    if (docSnap.exists()) {
-      const product = docSnap.data();  
-      return { id, ...product };  
-    } else {
-      return null;
-    }
+    if (!snap.exists()) return null;
+
+    return { id, ...snap.data() };
   } catch (error) {
-    console.error("Error al obtener el producto:", error);
+    console.error("Error producto:", error);
     return null;
   }
 };

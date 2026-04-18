@@ -3,6 +3,8 @@
 import { useAuthContext } from "../../context/AuthContext";
 import { handleChange } from "../../utils/handleChange";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export function LoginForm() {
   const { login, loginWithGoogle } = useAuthContext();
@@ -14,21 +16,34 @@ export function LoginForm() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { success } = await login(values.email, values.password);
-    if (success) {
-      // Redirige a tu página en Firebase Hosting
-      window.location.href = "https://motorbike-next.firebaseapp.com/admin";
-    } else {
-      setError("Credenciales incorrectas, intenta nuevamente.");
-    }
+    try {
+      const { success, user } = await login(values.email, values.password);
 
-    setLoading(false);
+      if (!success || !user) {
+        setError("Credenciales incorrectas");
+        return;
+      }
+
+      // 🔒 CONTROL ADMIN
+      if (user.email !== "admin@email.com") {
+        setError("No tenés permisos de administrador");
+        return;
+      }
+
+      router.push("/admin/dashboard");
+    } catch (err) {
+      console.error(err);
+      setError("Error al iniciar sesión");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleGoogleLogin = async () => {
@@ -36,7 +51,7 @@ export function LoginForm() {
     setError(null);
 
     try {
-      await loginWithGoogle(); 
+      await loginWithGoogle();
       window.location.href = "https://motorbike-next.firebaseapp.com/admin";
     } catch (err) {
       setError("Error al iniciar sesión con Google.");
@@ -47,53 +62,45 @@ export function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="flex items-center justify-center py-20 px-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md"
+        className="w-full max-w-md bg-zinc-900 p-8 rounded-xl shadow-xl border border-zinc-800"
       >
-        <h2 className="text-2xl font-semibold text-center mb-6">Iniciar sesión</h2>
+        <h2 className="text-2xl font-semibold text-center mb-6 text-white">
+          Iniciar sesión
+        </h2>
 
-        {error && (
-          <p className="mb-4 text-red-600 font-medium text-center">{error}</p>
-        )}
+        {error && <p className="mb-4 text-red-500 text-center">{error}</p>}
 
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-            Email
-          </label>
+          <label className="block text-zinc-300 mb-2">Email</label>
           <input
             type="email"
             name="email"
-            id="email"
             value={values.email}
             onChange={(e) => handleChange({ e, setValues, values })}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 rounded-md bg-zinc-800 border border-zinc-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
         <div className="mb-6">
-          <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
-            Contraseña
-          </label>
+          <label className="block text-zinc-300 mb-2">Contraseña</label>
           <input
             type="password"
             name="password"
-            id="password"
             value={values.password}
             onChange={(e) => handleChange({ e, setValues, values })}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 rounded-md bg-zinc-800 border border-zinc-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className={`w-full mb-4 py-2 px-4 rounded-md text-white transition-colors ${
-            loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
-          }`}
+          className="w-full mb-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition"
         >
           {loading ? "Ingresando..." : "Iniciar sesión"}
         </button>
@@ -101,11 +108,16 @@ export function LoginForm() {
         <button
           type="button"
           onClick={handleGoogleLogin}
-          disabled={loading}
-          className="w-full flex items-center justify-center py-2 px-4 rounded-md border border-gray-300 text-gray-700 bg-white hover:bg-gray-100"
+          className="w-full flex items-center justify-center py-2 rounded-md border border-zinc-700 text-zinc-300 hover:bg-zinc-800 transition"
         >
-          <img src="/google-icon.svg" alt="Google Icon" className="w-5 h-5 mr-2" />
-          Iniciar sesión con Google
+          <Image
+            src="/google-icon.svg"
+            alt="Google"
+            width={20}
+            height={20}
+            className="mr-2"
+          />
+          Google
         </button>
       </form>
     </div>

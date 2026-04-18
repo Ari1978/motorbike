@@ -4,20 +4,21 @@ import Link from "next/link";
 
 export default function AdminPage() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-6">Panel de Administración</h1>
-      <p className="text-gray-700 mb-6">
-        Bienvenido al área de administración. Desde aquí puedes gestionar tu sitio.
+    <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-950 text-white p-6">
+      <h1 className="text-3xl font-bold mb-4">
+        Panel de Administración
+      </h1>
+
+      <p className="text-zinc-400 mb-6 text-center max-w-md">
+        Accedé al panel para gestionar productos, pedidos y contenido del sitio.
       </p>
+
       <Link
         href="/admin/login"
-        className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        className="px-6 py-3 bg-blue-600 rounded-md hover:bg-blue-700 transition font-medium"
       >
-        Ir al login
+        Iniciar sesión
       </Link>
     </div>
   );
 }
-
-
-

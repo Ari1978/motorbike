@@ -1,4 +1,3 @@
-
 'use client';
 
 import { createContext, useState, useEffect } from 'react';
@@ -6,40 +5,58 @@ import { createContext, useState, useEffect } from 'react';
 export const CartContext = createContext(null);
 
 export function ShoppingCartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  // 🔥 Inicialización correcta (sin flicker)
+  const [cart, setCart] = useState(() => {
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("cart");
+      return storedCart ? JSON.parse(storedCart) : [];
+    }
+    return [];
+  });
+
 
   useEffect(() => {
-    console.log('Carrito actualizado:', cart);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   }, [cart]);
 
+  
   const agregarAlCarrito = (product, quantity = 1) => {
-    const exists = cart.find(item => item.id === product.id);
-    if (exists) {
-      setCart(
-        cart.map(item =>
+    if (!product?.id) return;
+
+    setCart(prev => {
+      const exists = prev.find(item => item.id === product.id);
+
+      if (exists) {
+        return prev.map(item =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + quantity }
             : item
-        )
-      );
-    } else {
-      setCart([...cart, { ...product, quantity }]);
-    }
+        );
+      }
+
+      return [...prev, { ...product, quantity }];
+    });
   };
+
 
   const eliminarProducto = (id) => {
-    setCart(cart.filter(item => item.id !== id));
+    setCart(prev => prev.filter(item => item.id !== id));
   };
 
+  // Vaciar carrito (limpia también localStorage)
   const vaciarCarrito = () => {
     setCart([]);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("cart");
+    }
   };
 
   return (
     <CartContext.Provider
       value={{
         cart,
-        setCart,
         agregarAlCarrito,
         eliminarProducto,
         vaciarCarrito,
