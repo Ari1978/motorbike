@@ -1,37 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏍️ Motorbike E-commerce
 
-## Getting Started
+Aplicación web de e-commerce desarrollada con **Next.js y Firebase**, enfocada en la gestión de productos y experiencia de compra.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Tecnologías
+
+* Next.js
+* React
+* Firebase (Firestore)
+* JavaScript
+* CSS / Tailwind (si usaste)
+
+---
+
+## ⚙️ Funcionalidades
+
+### 🛍️ Catálogo de productos
+
+* Visualización de productos
+* Filtrado por categorías
+* Detalle individual de cada producto
+
+### 🛒 Carrito de compras
+
+* Agregar / eliminar productos
+* Cálculo automático de totales
+* Persistencia del carrito
+
+### 🔥 Gestión de datos
+
+* Base de datos en Firebase
+* Actualización dinámica de productos
+* Lectura en tiempo real
+
+---
+
+## 🔗 Demo
+
+🌐 Aplicación: https://tu-app.vercel.app](https://motorbike-u5fe-fyf9q0ozr-ari1978s-projects.vercel.app
+
+---
+
+## 🧭 Flujo de uso
+
+1. Explorar catálogo
+2. Ver detalle de productos
+3. Agregar productos al carrito
+4. Simular compra
+5. Ingresar como admin
+6. Crear, editar y eliminar producto.
+
+#### En el footer se encuentra el acceso a admin
+User: admin@email.com
+Password: admin123
+
+---
+
+## 🛠️ Instalación
+
+```bash id="mb1"
+git clone https://github.com/TU-USUARIO/motorbike.git
+cd motorbike
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ▶️ Ejecución
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash id="mb2"
+npm run dev
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🌐 Variables de entorno
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Crear archivo `.env.local`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env id="mb3"
+NEXT_PUBLIC_FIREBASE_API_KEY=your_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧠 Arquitectura
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# motorbike
+* Componentes reutilizables
+* Manejo de estado global (Context API)
+* Separación entre lógica y presentación
+* Consumo de base de datos desde Firebase
+
+---
+
+## 📌 Estado del proyecto
+
+Proyecto funcional deployado, con posibilidad de mejoras futuras:
+
+* Integración de pagos
+* Autenticación de usuarios
+* Panel de administración
+
+---
+
+## 👨‍💻 Autor
+
+**Ariel Suarez**
+Full Stack Developer
